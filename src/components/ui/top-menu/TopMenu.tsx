@@ -18,9 +18,9 @@ export const TopMenu = () => {
     {/* Center Menu */}
     {/* hidden sm: block sirve en este caso para ocultar las categorias en pantallas chicas como los telefonos */}
     <div className='hidden sm:block'> 
-            <Link className='m-2 p-2 rounded-md transition-all hover:bg-gray-100' href='/caregory/men'>Hombres</Link>
-            <Link className='m-2 p-2 rounded-md transition-all hover:bg-gray-100' href='/caregory/women'>Mujeres</Link>
-            <Link className='m-2 p-2 rounded-md transition-all hover:bg-gray-100' href='/caregory/kids'>Niños</Link>
+            <Link className='m-2 p-2 rounded-md transition-all hover:bg-gray-100' href='/category/men'>Hombres</Link>
+            <Link className='m-2 p-2 rounded-md transition-all hover:bg-gray-100' href='/category/women'>Mujeres</Link>
+            <Link className='m-2 p-2 rounded-md transition-all hover:bg-gray-100' href='/category/kids'>Niños</Link>
     </div>
 
     {/* Search, Cart, Menu */}
