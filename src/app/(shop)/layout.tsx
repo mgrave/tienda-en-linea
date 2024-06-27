@@ -8,7 +8,10 @@ import { TopMenu } from "@/components";
       <main className="min-h-screen">
         <TopMenu/>
 
-        {children}
+          <div className="px-0 sm:px-8">
+          {children}
+
+          </div>
       </main>
     );
  }
