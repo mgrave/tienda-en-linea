@@ -28,6 +28,7 @@ const closeMenu = useUIStore(state => state.closeSideMenu);
             isSideMenuOpen && (
 
                 <div
+                onClick={closeMenu}
                  className='fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm'></div>
             )
         }

@@ -1,9 +1,16 @@
+'use client'
+
 import { titleFont } from '@/config/fonts'
+import { useUIStore } from '@/store';
 import Link from 'next/link'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
 
 
 export const TopMenu = () => {
+    //este closeMenu es un hook, asi que tenemos que usar use client
+    const openSideMenu = useUIStore(state => state.openSideMenu);
+    //de ahi buscamos el boton, y lo mandamos a llamar
+
   return (
     <nav className='flex px-5 justify-between items-center w-full'>
     
@@ -37,7 +44,7 @@ export const TopMenu = () => {
             <IoCartOutline className='w-5 h-5'></IoCartOutline>
         </div>
         </Link>
-        <button className='m-2 p-2 rounded-md transition-all hover:bg-gray-100'>
+        <button onClick={openSideMenu} className='m-2 p-2 rounded-md transition-all hover:bg-gray-100'>
             Menú
         </button>
     </div>
