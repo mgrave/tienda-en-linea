@@ -1,4 +1,4 @@
-import { SizeSelector } from "@/components";
+import { QuantitySelector, SizeSelector } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
@@ -37,6 +37,7 @@ if (!product){
             {/* selector de tallas */}
                 <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes}></SizeSelector>
             {/* selector de cantidad */}
+            <QuantitySelector quantity={2}></QuantitySelector>
 
             {/* button */}
                 <button className="btn-primary my-5">
