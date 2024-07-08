@@ -23,16 +23,19 @@ export default function() {
                         <Link href="/" className="underline mb-5">
                         Continue shopping
                         </Link>
-                    </div>
                     {/* items */}
                     {
                         productsInCart.map(product => (
-                            <div key={product.slug} className="flex">
+                            <div key={product.slug} className="flex mb-5">
                                 <Image 
                                 src={`/products/${product.images[0]}`}
                                 alt={product.title}
                                 width={100}
                                 height={100}
+                                style={{
+                                    width: '100px',
+                                    height: '100px'
+                                }}
                                 className="mr-5 rounded"
                                 priority={true}
                                 ></Image>
@@ -49,9 +52,35 @@ export default function() {
                         ))
                     }
 
+                    </div>
+
 
 
                     {/* checkOut */}
+                    <div className="bg-white rounded-xl shadow-xl p-7">
+                        <h2 className="text-2xl mb-2">Purchase order summary</h2>
+
+                        <div className="grid grid-cols-2">
+                            <span>Number products</span>
+                            <span className="text-right">3 items</span>
+
+                            <span>Subtotal</span>
+                            <span className="text-right">$ 100</span>
+                            
+                            <span>Taxes (11.97%)</span>
+                            <span className="text-right">$ 11.97</span>
+                            
+                            <span className="mt-5 text-2xl">Total:</span>
+                            <span className="mt-5 text-2xl text-right">$ 111.97</span>
+                        </div>
+
+                        <div className="mt-5 mb-2 w-full">
+                            <Link className="flex btn-primary justify-center" href="/checkout/address">
+                            Checkout    
+                            </Link>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
