@@ -1,4 +1,4 @@
-import { QuantitySelector, Title } from "@/components";
+import { Title } from "@/components";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,7 +57,7 @@ export default function() {
                     {/* checkOut */}
                     <div className="bg-white rounded-xl shadow-xl p-7">
 
-                        <h2 className="font-bold text-2xl mb-2">Dirección de entrega</h2>
+                        <h2 className="font-bold text-2xl mb-2">Delivery address</h2>
                         <div className="mb-10">
                             <p className="text-xl">Ramses indalecio</p>
                             <p>Av. Paseo de reforma 6464</p>
