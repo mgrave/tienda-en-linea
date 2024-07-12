@@ -34,7 +34,7 @@ export default function({params}: Props) {
                     {/* carrito */}
                     <div className="flex flex-col mt-5">
                       <div className={
-                        clsx("flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5∂",
+                        clsx("flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
                             {
                                 'bg-red-500': false,
                                 'bg-green-700': true,
@@ -113,7 +113,7 @@ export default function({params}: Props) {
                         <div className="mt-5 mb-2 w-full">
                             
                         <div className={
-                        clsx("flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5∂",
+                        clsx("flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
                             {
                                 'bg-red-500': false,
                                 'bg-green-700': true,
