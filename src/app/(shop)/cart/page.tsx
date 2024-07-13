@@ -2,6 +2,7 @@ import { QuantitySelector, Title } from "@/components";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 //creando constante para los items
 const productsInCart = [
@@ -11,6 +12,9 @@ const productsInCart = [
 ]
 
 export default function() {
+
+    // redirect('/empty');
+
     return (
         <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
             <div className="flex flex-col w-[1000px]">
@@ -57,7 +61,7 @@ export default function() {
 
 
                     {/* checkOut */}
-                    <div className="bg-white rounded-xl shadow-xl p-7">
+                    <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
                         <h2 className="text-2xl mb-2">Purchase order summary</h2>
 
                         <div className="grid grid-cols-2">
