@@ -31,7 +31,7 @@ export default async function Home({searchParams}: Props) {
 
    <ProductGrid products={products}></ProductGrid>
 
-   <Pagination></Pagination>
+   <Pagination totalPages={totalPages}></Pagination>
    </>
   )
 }
