@@ -1,14 +1,20 @@
 import { ProductGrid, Title } from "@/components";
-import { initialData } from '../../seed/seed';
+
 import { getPaginatedProductsWithImages } from "@/actions";
 
-//este es el arreglo de productos semilla de la base de datos
-const products = initialData.products;
+interface Props {
+  searchParams: {
+    page?: string;
+  }
+}
 
 
-export default async function Home() {
+export default async function Home({searchParams}: Props) {
+//si viene el searchParams lo parseamos y si no viene entonces va a ser la pagina 1
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
-  const productTemp = await getPaginatedProductsWithImages();
+  const {products} = await getPaginatedProductsWithImages({page});
+ 
 
   return (
    <>

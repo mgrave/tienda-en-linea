@@ -1,5 +1,5 @@
 export interface Product {
-    //TODO: Id: string;
+    id: string;
     description: string;
     images: string[];
     inStock: number;
@@ -8,7 +8,7 @@ export interface Product {
     slug: string;
     tags: string[];
     title: string;
-    type: ValidType;
+    //TODO: type: ValidType;
     gender: Category
 }
 
