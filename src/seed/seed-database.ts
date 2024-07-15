@@ -1,11 +1,12 @@
 import prisma from '../lib/prisma';
 import { initialData } from './seed';
 
+
 async function main() {
     // 1. Borrar registros previos
     await Promise.all([
-        prisma.productImage.deleteMany(),
         prisma.product.deleteMany(),
+        prisma.productImage.deleteMany(),
         prisma.category.deleteMany()
 
     ]);
@@ -37,6 +38,34 @@ async function main() {
         return map;
     }, {} as Record<string, string>) //<string=shirt, string=categoryID> 
     console.log(categoriesMap);
+
+    
+
+    //productos
+
+    // const {images, type, ...rest} = products[0];
+
+    // await prisma.product.create({
+    //     data: {
+    //         ...rest,
+    //         categoryId: categoriesMap['shirts']
+    //     }
+    // })
+
+
+    products.forEach(async(product) => {
+        const {type, images, ...rest} = product;
+
+        const dbProduct = await prisma.product.create({
+            data: {
+                ...rest,
+                categoryId: categoriesMap[type]
+            }
+        })
+
+       
+    });
+
     
 
     console.log('Seed se ejecuto correctamente');
