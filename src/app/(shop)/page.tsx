@@ -1,3 +1,4 @@
+export const revalidate = false
 import { Pagination, ProductGrid, Title } from "@/components";
 
 import { getPaginatedProductsWithImages } from "@/actions";

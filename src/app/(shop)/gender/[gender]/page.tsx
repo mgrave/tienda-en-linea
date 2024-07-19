@@ -1,9 +1,10 @@
+export const revalidate = false
 import { getPaginatedProductsWithImages } from "@/actions";
 import { Pagination, ProductGrid, Title } from "@/components";
-import { initialData } from "@/seed/seed";
+
 import { Gender } from "@prisma/client";
 
-import { notFound, redirect } from "next/navigation";
+import {redirect } from "next/navigation";
 
 
 
@@ -17,9 +18,10 @@ interface Props {
 }
 
 
-export default async function({params, searchParams}: Props) {
+export default async function GenderByPage({params, searchParams}: Props) {
 
     const {gender} = params;
+  
 
     //si viene el searchParams lo parseamos y si no viene entonces va a ser la pagina 1
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
