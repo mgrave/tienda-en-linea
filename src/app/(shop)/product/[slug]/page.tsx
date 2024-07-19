@@ -1,7 +1,7 @@
 export const revalidate = 604800; //en 7 dias se va a revalidar
 
 import { getProductBySlug } from "@/actions";
-import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelector } from "@/components";
+import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
 import { titleFont } from "@/config/fonts";
 
 import { notFound } from "next/navigation";
@@ -50,9 +50,11 @@ if (!product){
 
            {/* Detalles del producto */}
            <div className="col-span-1 px-5 ">
+            <StockLabel slug={product.slug}></StockLabel>
             <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
                 {product.title}
             </h1>
+
             <p className="text-lg mb-5">${product.price}</p>
             {/* selector de tallas */}
                 <SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes}></SizeSelector>
