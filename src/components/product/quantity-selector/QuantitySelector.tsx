@@ -12,7 +12,7 @@ export const QuantitySelector = ({quantity}:Props) => {
     
     const [count, setCount] = useState(quantity);
     //creamos la constante para recibir el valor
-    const onQuantityChanged = (value: number) => {
+    const onValueChanged = (value: number) => {
         if (count + value < 1) return; //no va a regresar nada
 
         setCount(count + value);
@@ -21,7 +21,7 @@ export const QuantitySelector = ({quantity}:Props) => {
   return (
     <div className="flex">
         
-        <button onClick={ () => onQuantityChanged(-1)}>
+        <button onClick={ () => onValueChanged(-1)}>
             <IoRemoveCircleOutline size={30}></IoRemoveCircleOutline>
         </button>
 
@@ -29,7 +29,7 @@ export const QuantitySelector = ({quantity}:Props) => {
             {count}
         </span>
 
-        <button onClick={ () => onQuantityChanged(+1)}>
+        <button onClick={ () => onValueChanged(+1)}>
             <IoAddCircleOutline size={30}></IoAddCircleOutline>
         </button>
     </div>

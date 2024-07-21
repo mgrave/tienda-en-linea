@@ -10,6 +10,7 @@ interface Props {
 
 export const AddToCart = ({product}:Props) => {
     const [size, setSize] = useState<Size|undefined>();
+    const [quantity, setQuantity] = useState<number>(1);
 
   return (
     <>
