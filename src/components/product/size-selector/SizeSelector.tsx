@@ -4,12 +4,15 @@ import type { Size } from "@/interfaces"
 import clsx from "clsx";
 
 interface Props {
-    selectedSize: Size;
+    selectedSize?: Size;
     availableSizes: Size[];
+
+    //metodo para actualizar el tamano seleccionado
+    onSizeChanged: (size: Size) => void;
 }
 
-//aqui lo vamos a desestructurar
-export const SizeSelector = ({selectedSize, availableSizes}: Props) => {
+//aqui lo vamos a desestructurar para poder mandarlo a llamar
+export const SizeSelector = ({selectedSize, availableSizes, onSizeChanged}: Props) => {
   
     return (
   <div className="my-5">
@@ -20,7 +23,7 @@ export const SizeSelector = ({selectedSize, availableSizes}: Props) => {
             {
                 availableSizes.map( size => (
                     // para hacer el claseName como estamos en un map, tenemos que poner la key.
-                    <button key={size} className={
+                    <button key={size} onClick={() => onSizeChanged(size)} className={
                         clsx(
                             "mx-2 hover:underline text-lg",
                             {
