@@ -6,7 +6,10 @@ import { inter } from "@/config/fonts";
 
 
 export const metadata: Metadata = {
-  title: "RAM | SHOP",
+  title: {
+    template: '%s - Store',
+    default: 'Home'
+  },
   description: "Tienda virtual de productos digitales",
 };
 
