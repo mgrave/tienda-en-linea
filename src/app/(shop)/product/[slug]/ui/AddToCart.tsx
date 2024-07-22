@@ -31,11 +31,12 @@ export const AddToCart = ({product}:Props) => {
             size: selectSize,
             image: product.images[0]
         }
-        //TODO: agregar al carrito
+        // agregar al carrito
         addProductToCart(cartProduct);
         setPosted(false);
         setQuantity(1);
         setSize(undefined);
+        //TODO: Agregar un modal o dailog para que el cliente sepa que su producto fue agregado al carrito
         console.log('aqui ya esta en el carrito' ,cartProduct);
     }
    
