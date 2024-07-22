@@ -7,6 +7,13 @@ interface State {
     //metodos para modificar el carrito de compras
     getTotalItems: () => number;
 
+    getSumaryInformation: () => {
+        subTotal: number;
+        tax: number;
+        total: number;
+        itemsInCart: number;
+    };
+
     //addProductToCart
     addProductTocart: (product: CartProduct) => void;
     //updateProductQuantity
@@ -29,6 +36,24 @@ export const useCartStore = create<State>()(
                 //tenemos que barrer todos nuestros elementos
                 return cart.reduce((total, item) => total + item.quantity, 0);
             },
+
+
+                getSumaryInformation: () => {
+                    const {cart} = get();
+
+                    const subTotal = cart.reduce(
+                        (subTotal, product) => (product.quantity * product.price) + subTotal,
+                        0
+                    );
+                    const tax = subTotal * 0.12;
+                    const total = subTotal + tax;
+                    const itemsInCart = cart.reduce((total, item) => total + item.quantity, 0)
+
+                    return {
+                        subTotal, tax, total, itemsInCart
+                    }
+                },
+
             addProductTocart: (product: CartProduct) => {
                 const {cart} = get();
             
