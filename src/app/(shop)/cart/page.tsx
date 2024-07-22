@@ -1,15 +1,10 @@
-import { QuantitySelector, Title } from "@/components";
-import { initialData } from "@/seed/seed";
-import Image from "next/image";
+import {Title } from "@/components";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { ProductsInCart } from "./ui/productsInCart";
+
+
 
 //creando constante para los items
-const productsInCart = [
-    initialData.products[0],
-    initialData.products[1],
-    initialData.products[2],
-]
 
 export default function CartPage() {
 
@@ -28,33 +23,7 @@ export default function CartPage() {
                         Continue shopping
                         </Link>
                     {/* items */}
-                    {
-                        productsInCart.map(product => (
-                            <div key={product.slug} className="flex mb-5">
-                                <Image 
-                                src={`/products/${product.images[0]}`}
-                                alt={product.title}
-                                width={100}
-                                height={100}
-                                style={{
-                                    width: '100px',
-                                    height: '100px'
-                                }}
-                                className="mr-5 rounded"
-                                priority={true}
-                                ></Image>
-
-                                <div>
-                                    <p>{product.title}</p>
-                                    <p>${product.price}</p>
-                                    <QuantitySelector quantity={1}></QuantitySelector>
-                                    <button className="underline mt-3">
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        ))
-                    }
+                     <ProductsInCart/>
 
                     </div>
 
