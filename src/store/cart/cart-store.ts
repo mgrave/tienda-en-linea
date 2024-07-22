@@ -10,6 +10,7 @@ interface State {
     //addProductToCart
     addProductTocart: (product: CartProduct) => void;
     //updateProductQuantity
+    updateProductQuantity: (product: CartProduct, quantity: number) => void;
     //removeProduct
 }
 
@@ -52,8 +53,20 @@ export const useCartStore = create<State>()(
                    
                 });
                 set({cart: updateCartProducts});
+            },
+
+            updateProductQuantity: (product: CartProduct, quantity: number) => {
+                const {cart} = get();
+
+                const updateCartProducts = cart.map( item => {
+                    if (item.id === product.id && item.size === product.size){
+                        return {...item, quantity: quantity};
+                    }
+                    //si ese no es el articulo, entonces que lo regrese para no hacerle modificaciones
+                    return item;
+                });
+                set({cart: updateCartProducts});
             }
-        
         })
         , {
             //segundo argumento va el nombre de nuestro store, el nombre de la llave que le queremos dar en el local storage
