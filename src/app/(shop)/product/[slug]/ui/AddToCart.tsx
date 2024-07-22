@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const AddToCart = ({product}:Props) => {
-  
+   
     //esta es la referencia a la funcion addprotuctToCart
     const addProductToCart = useCartStore(state => state.addProductTocart);
     const [selectSize, setSize] = useState<Size|undefined>();
@@ -36,7 +36,9 @@ export const AddToCart = ({product}:Props) => {
         setPosted(false);
         setQuantity(1);
         setSize(undefined);
+        console.log('aqui ya esta en el carrito' ,cartProduct);
     }
+   
 
   return (
     <>

@@ -22,12 +22,13 @@ export const useCartStore = create<State>()(
 
     addProductTocart: (product: CartProduct) => {
         const {cart} = get();
-       console.log({product});
+    
         //1. Revisar si el producto existe en el carrito con la talla seleccionada
         const productInCart = cart.some(
             //la funcion de some verifica si hay al menos 1 que cumpla la condicion
             (item) => item.id === product.id && item.size === product.size
         );
+        console.log('el producto va en camino al carrito', productInCart);
         if (!productInCart){
             set({cart: [...cart, product]});
             return;
