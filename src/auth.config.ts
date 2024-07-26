@@ -1,5 +1,4 @@
-import type { NextAuthConfig } from 'next-auth';
-import NextAuth from 'next-auth';
+import NextAuth, { type NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import {z} from 'zod';
  
@@ -15,9 +14,13 @@ export const authConfig: NextAuthConfig = {
                 .object({ email: z.string().email(), password: z.string().min(6) })
                 .safeParse(credentials);
 
+                console.log(parsedCredentials.success);
+
                 if (!parsedCredentials.success) return null;
 
                 const {email, password} = parsedCredentials.data;
+
+                console.log('AuthConfig.ts')
 
                 console.log({email, password});
 
