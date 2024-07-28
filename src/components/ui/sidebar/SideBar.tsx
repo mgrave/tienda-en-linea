@@ -5,6 +5,7 @@ import { IoCloseOutline, IoPersonOutline, IoLogOutOutline, IoSearchOutline, IoTi
 
 import { useUIStore } from '@/store';
 import clsx from 'clsx';
+import { logout } from '@/actions';
 
 export const SideBar = () => {
 
@@ -99,16 +100,17 @@ const closeMenu = useUIStore(state => state.closeSideMenu);
                 </IoLogOutOutline>
                     <span className='ml-3 text-xl '>Ingresar</span>
             </Link>
-            <Link 
-            href="/"
-            className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+            <button 
+            //mandamos a llamar el logout con funcion de flecha, porque necesitamos mandar un objeto plano
+            className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+            onClick={() => logout()}
             >
                 <IoLogOut 
                 size={30}
                 >
                 </IoLogOut>
                     <span className='ml-3 text-xl '>Salir</span>
-            </Link>
+            </button>
 
             {/* line Seoarator */}
             <div className='w-full h-px bg-gray-200 my-10'></div>
