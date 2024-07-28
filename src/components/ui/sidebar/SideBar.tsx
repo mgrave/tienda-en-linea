@@ -67,7 +67,9 @@ const closeMenu = useUIStore(state => state.closeSideMenu);
 
             {/* options menu */}
             <Link 
-            href="/"
+            href="/profile"
+             //evento
+             onClick={() => closeMenu()}
             className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
             >
                 <IoPersonOutline 

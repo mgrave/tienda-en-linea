@@ -1,6 +1,16 @@
- export default function ShopLayout({children}: {
+import { auth } from "@/auth.config";
+import { redirect } from "next/navigation";
+
+ export default async function ShopLayout({children}: {
     children: React.ReactNode;
  }) {
+
+    //determinar la sesion
+    const session = await auth();
+     if (session?.user) {
+      redirect('/');
+     }
+
     return (
    
       <main className="flex justify-center">
