@@ -3,7 +3,9 @@
 import { authenticate } from "@/actions";
 import { useActionState } from "react";
 import Link from "next/link";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import { IoInformationOutline } from "react-icons/io5";
+import clsx from "clsx";
 
 export const LoginForm = () => {
 
@@ -34,11 +36,25 @@ export const LoginForm = () => {
       name="password"
       id="password" />
 
-    <button
+      <div className="flex h-8 items-end space-x-1"
+      aria-live="polite"
+      aria-atomic="true">
+        {state === "credentialsSing" && (
+          <div className="flex flex-row mb-2">
+            <IoInformationOutline className="h-5 w-5 text-red-500"/>         
+            <p className="text-sm text-red-500">Las credenciales no son correctas</p>
+          </div>
+        )}
+
+      </div>
+
+      <LoginButton/>
+
+    {/* <button
       type="submit"
       className="btn-primary">
       Ingresar
-    </button>
+    </button> */}
 
 
     {/* divisor l ine */ }
@@ -55,5 +71,22 @@ export const LoginForm = () => {
     </Link>
 
   </form>
+  )
+}
+
+
+function LoginButton() {
+  const { pending} = useFormStatus();
+
+  return (
+    <button type="submit"
+    className={clsx({
+      "btn-primary": !pending,
+      "btn-disabled": pending
+    })}
+    disabled={pending}
+    >
+      Ingresar
+    </button>
   )
 }
