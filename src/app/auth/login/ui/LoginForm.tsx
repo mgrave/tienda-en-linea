@@ -1,19 +1,27 @@
 'use client';
 
 import { authenticate } from "@/actions";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import Link from "next/link";
 import { useFormState, useFormStatus } from "react-dom";
 import { IoInformationOutline } from "react-icons/io5";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
 
+    const router = useRouter();
     const [state, dispatch, ] = useFormState(
         authenticate,
         undefined,
       );
-      console.log({ state});
+      
+      useEffect(() => {
+        if (state === 'Success'){
+          //redireccionar
+          router.replace('/');
+        }
+      }, [state]);
       
      
 
@@ -39,7 +47,7 @@ export const LoginForm = () => {
       <div className="flex h-8 items-end space-x-1"
       aria-live="polite"
       aria-atomic="true">
-        {state === "credentialsSing" && (
+        {state === "CredentialsSignin" && (
           <div className="flex flex-row mb-2">
             <IoInformationOutline className="h-5 w-5 text-red-500"/>         
             <p className="text-sm text-red-500">Las credenciales no son correctas</p>
