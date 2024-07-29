@@ -19,11 +19,11 @@ export async function authenticate(
     });
     return 'Success'
   } catch (error) {
-    if((error as any).type === 'CredentialsSignin'){
+    console.log(error);
 
-      return 'CredentialsSignin';
+    return 'CredentialsSignin'
     }
-    return 'UnknownError';
-
-  }
+  
+  
+  
 }
