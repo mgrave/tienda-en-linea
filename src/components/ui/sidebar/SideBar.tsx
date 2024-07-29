@@ -13,6 +13,7 @@ export const SideBar = () => {
 const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
 const closeMenu = useUIStore(state => state.closeSideMenu);
 const {data: session} = useSession();
+const isAuthenticated = !!session?.user;
 
 
 
@@ -93,29 +94,42 @@ const {data: session} = useSession();
                 </IoTicketOutline>
                     <span className='ml-3 text-xl '>Ordenes</span>
             </Link>
-            <Link 
-            href="/auth/login"
-            className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-            onClick={() => closeMenu()}
-            >
-                <IoLogOutOutline 
-                size={30}
-                >
-                </IoLogOutOutline>
-                    <span className='ml-3 text-xl '>Ingresar</span>
-            </Link>
-            <button 
-            //mandamos a llamar el logout con funcion de flecha, porque necesitamos mandar un objeto plano
-            className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-            onClick={() => logout()}
-            
-            >
-                <IoLogOut 
-                size={30}
-                >
-                </IoLogOut>
-                    <span className='ml-3 text-xl '>Salir</span>
-            </button>
+
+            {
+                isAuthenticated && (
+                    <button 
+                    //mandamos a llamar el logout con funcion de flecha, porque necesitamos mandar un objeto plano
+                    className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                    onClick={() => logout()}
+                    
+                    >
+                        <IoLogOut 
+                        size={30}
+                        >
+                        </IoLogOut>
+                            <span className='ml-3 text-xl '>Salir</span>
+                    </button>
+                )
+            }
+
+            {
+                !isAuthenticated && (
+                    <Link 
+                    href="/auth/login"
+                    className='flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
+                    onClick={() => closeMenu()}
+                    >
+                        <IoLogOutOutline 
+                        size={30}
+                        >
+                        </IoLogOutOutline>
+                            <span className='ml-3 text-xl '>Ingresar</span>
+                    </Link>
+                  
+                )
+            }
+
+      
 
             {/* line Seoarator */}
             <div className='w-full h-px bg-gray-200 my-10'></div>
