@@ -1,6 +1,6 @@
 'use client';
 
-import { registerUser } from "@/actions";
+import { login, registerUser } from "@/actions";
 import clsx from "clsx";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,6 +13,8 @@ type FormInputs = {
 }
 
 export const RegisterForm = () => {
+    
+
     const [errorMessage, setErrorMessage] = useState('')
     const {register, handleSubmit, formState: {errors}} = useForm<FormInputs>();
 
@@ -27,9 +29,8 @@ export const RegisterForm = () => {
             setErrorMessage(resp.message);
             return;
         }
-        console.log({resp});
-
-
+        await login(email.toLocaleLowerCase(), password)
+        window.location.replace('/');
     }
 
 
@@ -85,7 +86,7 @@ export const RegisterForm = () => {
           }
           type="password" 
           autoFocus
-          {...register('password', {required: true, minLength: 7})}
+          {...register('password', {required: true, minLength: 4})}
           />
 
             
