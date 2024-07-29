@@ -5,8 +5,9 @@ import { IoCloseOutline, IoPersonOutline, IoLogOutOutline, IoSearchOutline, IoTi
 
 import { useUIStore } from '@/store';
 import clsx from 'clsx';
-import { logout } from '@/actions';
+
 import { useSession } from 'next-auth/react';
+import {signOut} from 'next-auth/react';
 
 
 
@@ -125,7 +126,7 @@ console.log({session});
                     <button 
                     //mandamos a llamar el logout con funcion de flecha, porque necesitamos mandar un objeto plano
                     className='flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all'
-                    onClick={() => logout()}
+                    onClick={() => signOut()}
                     
                     >
                         <IoLogOut 
