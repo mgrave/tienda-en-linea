@@ -9,6 +9,7 @@ import { useAddressStore } from "@/store";
 import { useEffect } from "react";
 import { deleteUserAddress, setUserAddress } from "@/actions";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type FormInputs = {
   firstName: string;
@@ -17,6 +18,7 @@ type FormInputs = {
   address2?: string;
   postalCode: string;
   city: string;
+  state: string;
   country: string;
   phone: string;
   rememberAddress: boolean;
@@ -30,6 +32,7 @@ interface Props {
 //aqui desestructuramos nuestras properties y tomamos el country
 export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
 
+  const router = useRouter();
   const {handleSubmit, register, formState: {isValid}, reset} = useForm<FormInputs>({
     defaultValues: {
       // leer de la base de datos
@@ -52,7 +55,7 @@ export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
   }, [])
 
   //registrar la data
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = async (data: FormInputs) => {
     
 
     setAddress(data);
@@ -60,11 +63,13 @@ export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
 
     if (rememberAddress) {
       // Server Action
-      setUserAddress(restAddress, session!.user.id)
+      await setUserAddress(restAddress, session!.user.id)
     } else {
      
-      deleteUserAddress(session!.user.id);
+      await deleteUserAddress(session!.user.id);
     }
+
+    router.push('/checkout');
     
   }
 
@@ -118,6 +123,14 @@ export const AddressForm = ({countries, userStoredAddress = {}}: Props) => {
       <input 
         type="text" 
         className="p-2 border rounded-md bg-gray-200" {...register('city', {required: true})}
+      />
+    </div>
+
+    <div className="flex flex-col mb-2">
+      <span>Estado</span>
+      <input 
+        type="text" 
+        className="p-2 border rounded-md bg-gray-200" {...register('state', {required: true})}
       />
     </div>
 

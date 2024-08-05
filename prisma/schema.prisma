@@ -95,6 +95,7 @@ model UserAddress {
   postalCode String
   phone      String
   city       String
+  state      String
 
   //relaciones
   country Country @relation(fields: [countryId], references: [id])
