@@ -1,20 +1,43 @@
 'use client';
 
 import { useAddressStore, useCartStore } from "@/store";
-import { currencyFormat } from "@/utils";
+import { currencyFormat, } from "@/utils";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 export const PlaceOrder = () => {
 
     const [loaded, setLoaded] = useState(false);
+    const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+
     //aqui tomaremos la informacion que viene de nuestro store
     const address = useAddressStore(state => state.address);
 
     const {itemsInCart, subTotal, tax, total} = useCartStore(state => state.getSumaryInformation());
 
+    const cart = useCartStore(state => state.cart);
+
     useEffect(() => {
         setLoaded(true);
     }, []);
+
+    //funcion para dar solo un click al boton de pagar orden
+    const onPlaceOrder = async() => {
+        setIsPlacingOrder(true);
+        // await sleep(2);
+
+        const productsToOrder = cart.map(product => ({
+            productId: product.id,
+            quantity: product.quantity,
+            size: product.size,
+        }))
+
+        //objetos a llamar
+        console.log({address, productsToOrder});
+
+         setIsPlacingOrder(false);
+
+    }
 
     if (!loaded){
         return <p>Loading......</p>
@@ -63,8 +86,16 @@ export const PlaceOrder = () => {
             </span>
         </p>
 
+        {/* <p className="text-red-500">Error en la creación</p> */}
+
         <button 
-        className="flex btn-primary justify-center" 
+        onClick={onPlaceOrder}
+        className={
+            clsx({
+                'btn-primary': !isPlacingOrder,
+                'btn-disabled': isPlacingOrder
+            })
+        } 
         //href="/orders/1234"
         >
         Pay Now   
