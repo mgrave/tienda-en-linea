@@ -82,16 +82,24 @@ export const  placeOrder = async(producIds: ProductToOrder[], address: Address) 
         });
 
         //Validar si el price es cero, entonces lanzar un error
-        
+
 
         
         //paso 3. Crear la direccion de la orden
+        const {country, ...restAddress} = address;
+        const orderAddress = await tx.orderAddress.create({
+            data: {
+                ...restAddress,
+                countryId: country,
+                orderId: order.id,
+            }
+        })
 
 
         return {
-            order: order,
             updatedProducts: [],
-            orderAddress: {}
+            order: order,
+            orderAddress: orderAddress,
         }
     });
 
