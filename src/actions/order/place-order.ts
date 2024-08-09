@@ -36,6 +36,24 @@ export const  placeOrder = async(producIds: ProductToOrder[], address: Address) 
     const itemsInOrder = producIds.reduce((count, p) =>count + p.quantity , 0);
     console.log(itemsInOrder);
   
+    //calcular los totales
+    const {subTotal, tax, total} = producIds.reduce( (totals, item) => {
+
+        const productQuantity = item.quantity;
+        const product = products.find(product => product.id === item.productId);
+
+        if(!product) throw new Error(`${item.productId} no existe Error - 500`);
+
+        const subTotal = product.price * productQuantity;
+
+        totals.subTotal += subTotal;
+        totals.tax += subTotal * 0.12;
+        totals.total += subTotal * 1.12;
+
+        return totals;
+    }, {subTotal: 0, tax: 0, total: 0})
+   
+    //Crear la transacción de base de datos
 
 
 }
