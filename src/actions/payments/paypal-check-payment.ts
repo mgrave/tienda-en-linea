@@ -2,7 +2,7 @@
 
 import { PaypalOrderStatusResponse } from "@/interfaces";
 import prisma from "@/lib/prisma";
-import { stat } from "fs";
+
 import { revalidatePath } from "next/cache";
 
 export const paypalCheckPayment = async(paypalTransactionId: string) => {
