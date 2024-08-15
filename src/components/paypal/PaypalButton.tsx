@@ -31,7 +31,7 @@ export const PaypalButton = ({orderId, amount}:Props) => {
             intent: 'CAPTURE',
             purchase_units: [
                 {
-                    //invoice_id: 'order_id'
+                    invoice_id: orderId,
                     amount: {
                         value: `${rountedAmount}`,
                         currency_code: 'USD'
@@ -50,7 +50,7 @@ export const PaypalButton = ({orderId, amount}:Props) => {
 
     const onApprove = 
     async( data: OnApproveData, actions: OnApproveActions) => {
-        console.log('onApprove');
+       
         const details = await actions.order?.capture();
         if(!details?.id) return;
 
@@ -58,9 +58,12 @@ export const PaypalButton = ({orderId, amount}:Props) => {
     }
 
   return (
-    <PayPalButtons
-    createOrder={createOrder}
-    onApprove={onApprove}
-    ></PayPalButtons>
+    <div className="relative z-0">
+        <PayPalButtons
+        createOrder={createOrder}
+        onApprove={onApprove}
+        ></PayPalButtons>
+
+    </div>
   )
 }

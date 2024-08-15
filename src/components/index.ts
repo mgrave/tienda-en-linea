@@ -11,6 +11,8 @@ export * from './paypal/PaypalButton';
 
 export * from './providers/Providers';
 
+export * from './orders/OrderStatus';
+
 export * from './ui/footer/Footer';
 export * from './ui/pagination/Pagination';
 export * from './ui/top-menu/TopMenu';

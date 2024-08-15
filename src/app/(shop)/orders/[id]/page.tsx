@@ -1,9 +1,8 @@
 
 
-import { PaypalButton, Title } from "@/components";
+import { OrderStatus, PaypalButton, Title } from "@/components";
 import Image from "next/image";
-import clsx from 'clsx';
-import { IoCardOutline } from "react-icons/io5";
+
 import { getOrderById } from "@/actions/order/get-order-by-id";
 import { redirect } from "next/navigation";
 import { currencyFormat } from "@/utils";
@@ -35,23 +34,7 @@ export default async function OrdersByIdPage({params}: Props) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                     {/* carrito */}
                     <div className="flex flex-col mt-5">
-                      <div className={
-                        clsx("flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                            {
-                                'bg-red-500': !order!.isPaid,
-                                'bg-green-700': order!.isPaid,
-                            }
-                        )
-                      }>
-                        <IoCardOutline size={30}></IoCardOutline>
-                        {/* <span className="mx-2">Pending payment</span> */}
-                        <span className="mx-2">
-                            {
-                                order?.isPaid ? 'Paid' : 'Not paid'
-                            }
-                            </span>
-                      </div>
-
+                     <OrderStatus isPaid={order?.isPaid ?? false}/>
 
                     {/* items */}
                     {
@@ -110,7 +93,7 @@ export default async function OrdersByIdPage({params}: Props) {
                         <span>Subtotal</span>
                         <span className="text-right">{currencyFormat(order!.subTotal)}</span>
 
-                        <span>Taxes (12%)</span>
+                        <span>Taxes</span>
                         <span className="text-right">{currencyFormat(order!.tax)}</span>
 
                         <span className="mt-5 text-2xl">Total:</span>
@@ -118,12 +101,19 @@ export default async function OrdersByIdPage({params}: Props) {
                         </div>
 
                         <div className="mt-5 mb-2 w-full">
-                            
-                       <PaypalButton
-                       amount={order!.total}
-                       orderId={order!.id}
-                       />
 
+                            {
+                                order?.isPaid
+                                ? (
+                                    <OrderStatus isPaid={ order?.isPaid ?? false} />
+                                )
+                                : (
+                                    <PaypalButton
+                                    amount={order!.total}
+                                    orderId={order!.id}
+                                    />
+                                )
+                            }
                         
                         </div>
 
