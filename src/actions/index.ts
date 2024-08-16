@@ -20,3 +20,5 @@ export * from './payments/paypal-check-payment';
 export * from './products/product-pagination';
 export * from './products/get-product-by-slug';
 export * from './products/get-stock-by-slug';
+
+export * from './user/get-paginated-user';
