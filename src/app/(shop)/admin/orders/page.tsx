@@ -8,8 +8,18 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { IoCardOutline } from 'react-icons/io5';
 
+interface Props {
+  searchParams: {
+    page?: string;
+  }
+}
 
-export default async function OrdersPage() {
+
+
+export default async function OrdersPage({searchParams}:Props) {
+
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  //const {products, currentPage, totalPages} = await getPaginatedProductsWithImages({page});
 
   const {ok, orders = []} = await getPaginatedOrders();
 
@@ -78,7 +88,7 @@ export default async function OrdersPage() {
 
           </tbody>
         </table>
-        <Pagination totalPages={3}/>
+      {/* <Pagination totalPages={3}/> */}
       </div>
     </>
   );
