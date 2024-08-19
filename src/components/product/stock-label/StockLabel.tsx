@@ -15,14 +15,14 @@ export const StockLabel = ({slug}:Props) => {
 
     //con ese slug necesito determinar cuanta cantidad ahi en el stock
     useEffect(()=> {
+        //creando funcion
+        const getStock = async () => { 
+            const inStock = await getStockBySlug(slug);
+            setStock(inStock);
+            setIsLoading(false);
+        }
         getStock();
-    }, [])
-    //creando funcion
-    const getStock = async () => { 
-        const inStock = await getStockBySlug(slug);
-        setStock(inStock);
-        setIsLoading(false);
-    }
+    }, [slug])
     
   return (
     <>
