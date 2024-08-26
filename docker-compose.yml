@@ -1,13 +1,59 @@
-
+version: '3.8'
 services:
-  postgres-db:
-    image: postgres:15.3
+  postgres:
+    image: postgres:15.3-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    environment:
+      # You'll notice the DATABASE_URL variable in the docker-compose.yml file is the same as the DATABASE_URL variable in the .env file - except the host has been updated to postgres instead of localhost.
+      # This will prevent you from getting the error: Error: Can't reach database server at localhost:5432
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}?schema=${POSTGRES_SCHEMA}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - nestjs
+      
+  pgadmin:
+    image: dpage/pgadmin4
     restart: always
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: postgres      
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
-      - 5433:5432
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - nestjs
+    volumes:
+      - pgadmin:/var/lib/pgadmin       
+      
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?schema=${POSTGRES_SCHEMA}
+    # Run a command against the development stage of the image
+    command: npm run start
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      
+volumes:
+    postgres:
+    pgadmin:
+
+networks:
+   nestjs:
